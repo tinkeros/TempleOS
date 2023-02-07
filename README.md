@@ -5,6 +5,8 @@
 
 The USB boot version is mainly for testing.  With this you can run TempleOS on some machines which might otherwise not boot it because they do not have legacy drive support or because of HPET issues.
 
-If you have IDE drives or SATA in compatability / legacy mode, have a DOS (NOT GPT) partition table and have pre-made FAT32 partitions (of reasonably small size < 16GB), then maybe you can mount them and possibly do a manual install.  Installation is completely unsupported, the automated installer will defintiely not work as-is in many cases and tryinig to do so is at your own risk!
+If you have IDE drives or SATA in compatability / legacy mode, have a DOS (NOT GPT) partition table and have pre-made/formatted FAT32 partitions (of reasonably small size < 16GB), then maybe you can mount them and possibly do a manual install.  Installation is completely unsupported, the automated installer will defintiely not work as-is in many cases and tryinig to do so is at your own risk!
 
 This might also be useful for recovery purposes by booting via USB, running AutoMountIDE and then fixing your broken distro.
+
+If you don't see video it is likely you are trying to run it on a computer which is way too new and probably doesn't even have VGA support/VGA BIOS/support for the old VGA registers TempleOS requires.
