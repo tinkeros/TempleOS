@@ -12,3 +12,28 @@ This runs TempleOS baremetal, ring-0, not in a VM.  This is not a way to install
 These versions should be fully compatible with older 3rd party software written by Alec which use the VGA registers for graphics stuff instead of a linear framebuffer obtained from VBE (as is the case with TinkerOS/Zeal).
 
 FreeDOS and older versions of clonezilla/ttylinux are provided to help with formatting/partitioning drives TempleOS cannot handle and also for finding IO ports TempleOS needs to know to install on some machines.  Sometimes the drive contents/size/existing partitioning or the probing TempleOS does prevents it from being installed by the normal installer.  I have found many machines where the normal installer fails, but it is possible to make a completely working TempleOS install if you manually partition/format the drives and manually enter the IO ports for them.  IDE support has been removed from most linux kernels, but the version of clonezilla included on this has IDE support.  You can boot it and use it to manually partition/format disks and/or run lspci -vv to find IO ports with it from the command line.
+
+The USB version extracts <a href="https://templeos.org/Downloads/TempleOS.ISO">TempleOS.ISO</a> (md5 hash: 2facf5d7cfa08de4c47aede4a64cfb44) onto the ram disk.  TempleOS.ISO on the thumb drive is simply a redsea ISO that contains the special ramdisk loader kernel and Terry's original ISO file prepended with: BASESTARTBASESTART and appended with ISOENDISOENDISOEND (these are what the kernel uses to find it in memory).
+
+If you want to verify the USB installer extracts the original TempleOS:
+
+### If you're paranoid and want to know what ISO is actually being extracted to the RAM disk:
+
+#### Get the hash of the Terry's original (assuming Linux command line):
+```
+wget https://templeos.org/Downloads/TempleOS.ISO
+md5sum TempleOS.ISO
+2facf5d7cfa08de4c47aede4a64cfb44 TempleOS.ISO
+```
+#### Extracting the original ISO from that which is on the USB image (assuming Linux command line and TempleOS competency):
+- Extract TempleOS.ISO from the USB disk and copy it inside TempleOS.
+- Rename it with an ".ISO.C" extension to make it contiguous (so it can be mounted), ex: `Move("C:/TempleOS.ISO","C:/tmp.ISO.C");`
+- Mount it ex: `MountFile("C:/tmp.ISO.C");`
+- Copy off the embedded ISO ex: `Copy("M:/TempleOS.ISO.C","C:/");` The resulting ISO is 17350693 in side, 37 bytes larger than the 17350656 original (17350693=17350656 original + 18 bytes of "BASESTARTBASESTART" + 18 bytes of "ISOENDISOENDISOEND" + 1 null byte.
+- You can verify the hash of this equals that of above by stripping off the prefix and suffix as follows:
+`cat /mnt/qemu_disk/TempleOS.ISO.C | sed 's/.*BASESTARTBASESTART//' | sed 's/ISOENDISOENDISO.*//' | md5sum` which if you have done everything write will return the same hash as above.
+- Congratulations!  If you've got this far and understand everything along the way you probably can replace the original distro with your own distro and make a USB boot version of your own distro by simply reversing these steps and re-using my existing loader kernel.  If you try this, know that your ISO must be < 64MB in size.
+
+
+
+
