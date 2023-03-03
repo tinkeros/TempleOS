@@ -31,7 +31,7 @@ md5sum TempleOS.ISO
 - Mount it ex: `MountFile("C:/tmp.ISO.C");`
 - Copy off the embedded ISO ex: `Copy("M:/TempleOS.ISO.C","C:/");` The resulting ISO is 17350693 in side, 37 bytes larger than the 17350656 original (17350693=17350656 original + 18 bytes of "BASESTARTBASESTART" + 18 bytes of "ISOENDISOENDISOEND" + 1 null byte.
 - You can verify the hash of this equals that of above by stripping off the prefix and suffix as follows:
-`cat /mnt/qemu_disk/TempleOS.ISO.C | sed 's/.*BASESTARTBASESTART//' | sed 's/ISOENDISOENDISO.*//' | md5sum` which if you have done everything write will return the same hash as above.
+`cat /mnt/qemu_disk/TempleOS.ISO.C | sed 's/.*BASESTARTBASESTART//' | sed 's/ISOENDISOENDISO.*//' | md5sum` which if you have done everything correctly will return the same hash as above.
 - Congratulations!  If you've got this far and understand everything along the way you probably can replace the original distro with your own distro and make a USB boot version of your own distro by simply reversing these steps and re-using my existing loader kernel.  If you try this, know that your ISO must be < 64MB in size.
 
 
