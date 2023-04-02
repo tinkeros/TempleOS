@@ -1,7 +1,7 @@
 ## TempleOS respins
 
 ##### <a href="https://github.com/tinkeros/TempleOS/releases/download/v0/TempleOS_USB.img">TempleOS_USB.img</a> - Vanilla TempleOS booted to a RAM disk with the help of a modified kernel and memdisk.
-##### <a href="https://github.com/tinkeros/TempleOS/releases/download/v0/TempleOS_vanilla_no_HPET.ISO.C">TempleOS_vanilla_no_HPET.ISO.C</a> - Vanilla TempleOS with HPET disabled (it prevents TempleOS from booting on some machines)
+##### <a href="https://github.com/tinkeros/TempleOS/releases/download/v0/TempleOS_vanilla_no_HPET.ISO.C">TempleOS_vanilla_no_HPET.ISO.C</a> - Vanilla TempleOS with HPET disabled (it prevents TempleOS from booting on some machines or in some cases it will boot, but then lock up after a few minutes)
 
 The USB boot version is mainly for testing.  With this you can run TempleOS on some machines which might otherwise not boot it because they do not have legacy drive support or because of HPET issues.  The USB version boots to a RAM disk so nothing you do is saved and your drives are not touched unless you specifically try to mount or install to them.  When it asks you if you want to "Install onto hard drive (y or n)?" Choose n.
 
